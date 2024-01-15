@@ -21,15 +21,11 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 # El manejador de base de datos será SQLite (https://www.sqlite.org/index.html)
 # Flask crea automáticamente un archivo llamado "prods_datos.db" en el directorio local
 # *** IMPORTANTE: Si modificas los modelos de la base de datos es necesario que elimines
-#     el archivo "prods_datos.db", para que Flask genere las nuevas tablas con los cambios
+#     el archivo "prods_datos.db", para que Flask genere las nuevas tablas con los cam
+# bios
 db_uri = 'sqlite:///' + os.path.abspath(os.path.join(os.path.dirname(__file__), 'prods_datos.db'))
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-
-
-
 
 # La biblioteca SQLAlchemy permite modelar las tablas de la base de datos como objetos
 # de Python. SQLAlchemy se encarga de hacer las consultas necesarias sin necesidad de
