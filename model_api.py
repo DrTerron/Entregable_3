@@ -25,11 +25,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 db_uri = 'sqlite:///' + os.path.abspath(os.path.join(os.path.dirname(__file__), 'prods_datos.db'))
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-
-
-
+app.config['SQLALCHEMY_ECHO'] = True
 
 # La biblioteca SQLAlchemy permite modelar las tablas de la base de datos como objetos
 # de Python. SQLAlchemy se encarga de hacer las consultas necesarias sin necesidad de
