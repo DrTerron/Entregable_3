@@ -58,7 +58,7 @@ ns = api.namespace('entregable3', description='entregable3')
 # base de datos.
 predictive_model = pickle.load(open('simple_model.pkl','rb'))
 
-from db_models import Prediction
+from db_models import Estimación
 with app.app_context():
     db.create_all()
 
