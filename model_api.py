@@ -58,7 +58,7 @@ ns = api.namespace('entregable3', description='entregable3')
 # base de datos.
 predictive_model = pickle.load(open('simple_model.pkl','rb'))
 
-from db_models import Estimación
+from db_models import Estimacion
 with app.app_context():
     db.create_all()
 
@@ -108,7 +108,7 @@ class PredictionListAPI(Resource):
         # disponibles para consultar la base de datos desde los modelos de Python.
         # https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records
         return [
-            marshall_prediction(prediction) for prediction in Prediction.query.all()
+            marshall_prediction(estimacion) for estimacion in Estimacion.query.all()
         ], 200
 
     # -----------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ class PredictionListAPI(Resource):
 
         # La siguiente línea convierte una representación REST de una Prediccion en
         # un Objeto Prediccion mapeado en la base de datos mediante SQL Alchemy
-        prediction = Prediction(representation=api.payload)
+        prediction = Estimacion(representation=api.payload)
 
         # ---------------------------------------------------------------------
         # Aqui llama a tu modelo predictivo para crear un score o una inferencia
@@ -134,8 +134,8 @@ class PredictionListAPI(Resource):
             prediction.sepal_length, prediction.sepal_width, 
             prediction.petal_length, prediction.petal_width, 
         ])]
-        prediction.predicted_class = str(predictive_model.predict(model_data)[0])
-        print(prediction.predicted_class)
+        prediction.predicted_tipo = str(predictive_model.predict(model_data)[0])
+        print(prediction.predicted_tipo)
         # ---------------------------------------------------------------------
 
         # Las siguientes dos líneas de código insertan la predicción a la base
@@ -145,7 +145,7 @@ class PredictionListAPI(Resource):
 
         # Formar la respuesta de la predicción del modelo
         response = {
-            "class": prediction.predicted_class,  # la clase que predijo el modelo
+            "class": prediction.predicted_tipo,  # la clase que predijo el modelo
             "api_id": prediction.prediction_id  # El identificador de la base de datos
         }
         # La siguiente línea devuelve la respuesta a la solicitud POST con los datos
@@ -154,7 +154,7 @@ class PredictionListAPI(Resource):
 
 
 # =======================================================================================
-def marshall_prediction(prediction):
+def marshall_prediction(estimacion):
     """ Función utilería para transofmrar una Predicción de la base de datos a una 
         representación de un recurso REST.
         :param prediction: La predicción a transformar
@@ -164,7 +164,7 @@ def marshall_prediction(prediction):
         'sepal_width': prediction.sepal_width,
         'petal_length': prediction.petal_length,
         'petal_width': prediction.petal_width,
-        "class": str(prediction.predicted_class)
+        "tipo": str(prediction.predicted_tipo)
     }
     response = {
         "api_id": prediction.prediction_id,
