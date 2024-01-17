@@ -20,7 +20,7 @@ def create_simple_model():
         tu API REST.
     """
 
-    names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+    names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'tipo']
     dataset = read_csv('iris.csv', names=names)
     array = dataset.values
     X = array[:,0:4]
