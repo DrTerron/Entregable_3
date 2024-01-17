@@ -108,7 +108,7 @@ class PredictionListAPI(Resource):
         # disponibles para consultar la base de datos desde los modelos de Python.
         # https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records
         return [
-            marshall_prediction(estimacion) for estimacion in Estimacion.query.all()
+            marshall_prediction(Estimacion) for estimacion in Estimacion.query.all()
         ], 200
 
     # -----------------------------------------------------------------------------------
